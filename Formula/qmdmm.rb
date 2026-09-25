@@ -26,14 +26,28 @@
 # because a bottle relocates a prefix rather than an application bundle.
 # Turned off, the three programs land in `bin/` as siblings with Qt provided by
 # the machine. Measured locally: OFF against Homebrew's Qt gives all three
-# programs an LC_RPATH pointing into `/opt/homebrew/opt/qt/lib` plus the install
-# prefix's own `lib`, and all three start.
+# programs an LC_RPATH that resolves Qt out of the Homebrew prefix plus the
+# install prefix's own `lib`, and all three start.
 #
-# `depends_on "qt"` is Homebrew's Qt meta formula (83 formulae, including
-# qtbase, qtdeclarative and qtwebsockets, which is what QMdmm links against).
-# It is the only Qt Homebrew offers, so the Qt 6.7 floor the project declares
-# cannot be expressed here: the bottle floats with whatever the tap's `qt`
-# currently is.
+# The Qt dependencies are the three sub-modules QMdmm links against, and not
+# `qt`. That meta formula exists to install every Qt sub-module Homebrew ships -
+# 39 of them, including qtwebengine, which is 111 MiB of bottle on its own - and
+# a QMdmm install has no use for the other 36. The three are what a walk of
+# `otool -L` from all three programs to a fixed point reaches, against
+# Homebrew's Qt 6.11.2: qtbase (Core, Network, Gui, Widgets), qtdeclarative
+# (Qml, Quick, QuickWidgets) and qtwebsockets (QMdmmNetworking). `qtsvg` arrives
+# with qtdeclarative; CMake's own package files for all of them are found in the
+# Homebrew prefix, where linking the kegs puts them, so the build needs no
+# prefix path of its own.
+#
+# `qttools` is a build dependency: QMdmmGui's CMakeLists.txt asks for
+# LinguistTools, and `qt6_add_translations` runs lupdate and lrelease while
+# building. Other modules can be added the day something links them, which is
+# what makes this list a reading rather than a guess.
+#
+# None of this pins a Qt version - Homebrew keeps one version of each formula -
+# so the Qt 6.7 floor the project declares cannot be expressed here and the
+# bottle floats with whatever the tap's Qt currently is.
 class Qmdmm < Formula
   desc "Multiplayer card game server, bots and client"
   homepage "https://github.com/QMdmm/QMdmm"
@@ -44,7 +58,10 @@ class Qmdmm < Formula
 
   depends_on "cmake" => :build
   depends_on "ninja" => :build
-  depends_on "qt"
+  depends_on "qttools" => :build
+  depends_on "qtbase"
+  depends_on "qtdeclarative"
+  depends_on "qtwebsockets"
 
   def install
     system "cmake", "-S", ".", "-B", "build", *std_cmake_args,
