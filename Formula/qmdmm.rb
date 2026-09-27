@@ -19,15 +19,15 @@
 # 0.0.1, whose tarball hashes to the sha256 below (measured three times, once
 # through codeload directly).
 #
-# `QMDMM_MACOS_APP_BUNDLE=OFF` is the switch that makes this the shape a bottle
-# can be built from. Left at its default on APPLE, the install produces a
-# self-contained `QMdmm6.app` with Qt's frameworks, plugins and QML modules
-# copied inside it - that is the `.dmg`'s shape, and it cannot be bottled
-# because a bottle relocates a prefix rather than an application bundle.
-# Turned off, the three programs land in `bin/` as siblings with Qt provided by
-# the machine. Measured locally: OFF against Homebrew's Qt gives all three
-# programs an LC_RPATH that resolves Qt out of the Homebrew prefix plus the
-# install prefix's own `lib`, and all three start.
+# `QMDMM_MACOS_APP_BUNDLE` picks the install shape, and `OFF` - which is also
+# what it defaults to - is the one a bottle can be built from: the three
+# programs land in `bin/` as siblings with Qt provided by the machine. Turned
+# on, the install produces a self-contained `QMdmm6.app` with Qt's frameworks,
+# plugins and QML modules copied inside it instead - that is the `.dmg`'s shape,
+# and it cannot be bottled because a bottle relocates a prefix rather than an
+# application bundle. Measured locally: the flat shape against Homebrew's Qt
+# gives all three programs an LC_RPATH that resolves Qt out of the Homebrew
+# prefix plus the install prefix's own `lib`, and all three start.
 #
 # The Qt dependencies are the three sub-modules QMdmm links against, and not
 # `qt`. That meta formula exists to install every Qt sub-module Homebrew ships -
