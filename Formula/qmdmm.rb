@@ -77,6 +77,12 @@ class Qmdmm < Formula
   # config.cpp: `if (parser.isSet("h")) { std::cout << helpText(); std::exit(0); }`).
   # The GUI and the Bot would have to be started and then killed, which is what
   # the harness stages do anyway.
+  #
+  # This block is run, too. An install does not execute it, so the packaging
+  # harness's Homebrew stage calls `brew test` on the copy it pours, and then
+  # calls it once more against a copy of the block below whose program is not
+  # installed - so the stage's reading is one that can go red. Rewriting this
+  # block to name something else therefore means updating that mutation with it.
   test do
     system bin/"QMdmmServer6", "--help"
   end
