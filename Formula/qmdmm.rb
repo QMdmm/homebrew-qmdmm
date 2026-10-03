@@ -58,7 +58,9 @@ class Qmdmm < Formula
 
   bottle do
     root_url "https://qmdmm.github.io/QMdmmPackagingCi/brew"
-    sha256 cellar: :any, arm64_tahoe: "abc5a50ed39dad022b8fb8f402bd511d8a28337c031ffed148b651d9347b495b"
+    sha256 cellar: :any, arm64_golden_gate: "81f55d7f3cdce5ef50723f10851258efa469784dd1943fcee04e6283efce1674"
+    sha256 cellar: :any, arm64_tahoe:       "05af0876e6106a6a8608e82d3ef92fd8675cc02ac644f840d37e96bea3e15017"
+    sha256 cellar: :any, arm64_sequoia:     "1bb297f36443eb86a0023958438526ab1708443624e880fb5553632e9fb61a1b"
   end
 
   depends_on "cmake" => :build
