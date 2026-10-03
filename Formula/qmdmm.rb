@@ -56,6 +56,11 @@ class Qmdmm < Formula
   license "AGPL-3.0-or-later"
   head "https://github.com/QMdmm/QMdmm.git", branch: "main"
 
+  bottle do
+    root_url "https://qmdmm.github.io/QMdmmPackagingCi/brew"
+    sha256 cellar: :any, arm64_tahoe: "abc5a50ed39dad022b8fb8f402bd511d8a28337c031ffed148b651d9347b495b"
+  end
+
   depends_on "cmake" => :build
   depends_on "ninja" => :build
   depends_on "qttools" => :build
