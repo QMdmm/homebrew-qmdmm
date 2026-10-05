@@ -3,16 +3,18 @@
 # copy, so what a user installs and what the harness verifies is the same
 # recipe.
 #
-# There is no bottle block here. `brew bottle --merge --write` adds one, and
-# the harness adds it to its own working copy inside the tap directory - never
-# to this file, because a bottle records one exact build on one exact macOS
-# version and this repository should only learn about one when a release is
-# cut. A user installing today therefore builds from source, which is what the
+# The bottle block below is written by the release line rather than by hand:
+# stage A bottles the tag on each macOS the release supports, and
+# `release/publish-tap.sh` merges their checksums into this file and pushes it
+# here - so this repository learns about a bottle when a release is cut, and not
+# before. A bottle records one exact build on one exact macOS version, and the
+# block carries one line per version: an install on a macOS the block names
+# pours that bottle, and anywhere else falls back to the source tarball the
 # urls below describe.
 #
 # When the harness packages a ref that is not a tag - which is what the daily
 # run does, since it packages `main` - it rewrites `url`, `sha256` and
-# `version` in that working copy. A branch or a commit has no tag tarball, so
+# `version` in the copy it tapped. A branch or a commit has no tag tarball, so
 # the url becomes .../archive/<full-sha>.tar.gz and the version, normally
 # detected from the url, has to be read out of the source tree and stated
 # instead. The values committed here pin the tag that was verified locally: tag

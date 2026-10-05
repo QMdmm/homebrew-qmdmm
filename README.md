@@ -10,10 +10,11 @@ brew install qmdmm
 
 That installs `QMdmm6` (the GUI), `QMdmmServer6` and `QMdmmBot6`.
 
-## Status: source builds, no bottles yet
+## Status: bottles for macOS 15, 26 and 27 on Apple silicon
 
-This tap is new, so there is nothing to pour: an install builds QMdmm from the
-source tarball of a released tag.
+`brew install` pours the bottle the formula's block names for your macOS. On any
+other macOS it builds QMdmm from the source tarball of the released tag instead —
+that is what a macOS missing from the block means.
 
 The formula depends on the three Qt sub-modules QMdmm links against — `qtbase`,
 `qtdeclarative` and `qtwebsockets` — rather than on Homebrew's `qt`, which is the
@@ -22,10 +23,12 @@ Qt Linguist tools the GUI's translations are built with. The first build
 therefore installs Qt's core, QML, WebSockets and tools, not Qt's browser engine
 and the rest of the collection.
 
-Bottles, once there are any, are produced and verified by
+Bottles are produced and verified by
 [QMdmmPackagingCi](https://github.com/QMdmm/QMdmmPackagingCi) — the same harness
-that builds and checks the deb, rpm, pac and apk packages — and hosted as
-release assets of this repository.
+that builds and checks the deb, rpm, pac and apk packages — and served from that
+repository's Pages site, which is the address the formula's `root_url` names. The
+`.dmg` for the same release is a release asset of
+[QMdmm/QMdmm](https://github.com/QMdmm/QMdmm) instead.
 
 ## Apple silicon only
 
