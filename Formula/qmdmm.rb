@@ -53,16 +53,16 @@
 class Qmdmm < Formula
   desc "Multiplayer card game server, bots and client"
   homepage "https://github.com/QMdmm/QMdmm"
-  url "https://github.com/QMdmm/QMdmm/archive/refs/tags/0.0.1.tar.gz"
-  sha256 "2fe4085ca4ccd179f04321bfa4317a47f81cd6eb470d3a791db06b5b9f5a60d5"
+  url "https://github.com/QMdmm/QMdmm/archive/refs/tags/0.0.2.tar.gz"
+  sha256 "13c8b74dd6ea8cf3b7985230a6e97a733fa48aa6b7ef4734ad1c140ce2a62732"
   license "AGPL-3.0-or-later"
   head "https://github.com/QMdmm/QMdmm.git", branch: "main"
 
   bottle do
     root_url "https://qmdmm.github.io/QMdmmPackagingCi/brew"
-    sha256 cellar: :any, arm64_golden_gate: "81f55d7f3cdce5ef50723f10851258efa469784dd1943fcee04e6283efce1674"
-    sha256 cellar: :any, arm64_tahoe:       "05af0876e6106a6a8608e82d3ef92fd8675cc02ac644f840d37e96bea3e15017"
-    sha256 cellar: :any, arm64_sequoia:     "1bb297f36443eb86a0023958438526ab1708443624e880fb5553632e9fb61a1b"
+    sha256 cellar: :any, arm64_golden_gate: "02a1a33f58f85deecd3ba9f5a9dad3378592c01ea148780ac3d5c210adbf2227"
+    sha256 cellar: :any, arm64_tahoe:       "ad16fc593fbf23808bfed19b353b8f39bee6a336d4aa9263dd3db193d92f7998"
+    sha256 cellar: :any, arm64_sequoia:     "f2bc8a5dcfb1de32bbbc504ca26ef95909303a291ffe23b190224e941761f4f5"
   end
 
   depends_on "cmake" => :build
